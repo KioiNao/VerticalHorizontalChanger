@@ -1,0 +1,93 @@
+* {
+  box-sizing: border-box;
+}
+html,
+body,
+main {
+  height: 100%;
+  margin: 0;
+}
+main {
+  padding: 225px 0 0;
+}
+h1 {
+  text-align: center;
+  position: absolute;
+  top: 0;
+  height: 65px;
+  margin: 0;
+  width: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+}
+h2 {
+  margin: 3px;
+  height: 34px;
+}
+label {
+  font-size: 12pt;
+}
+textarea {
+  width: 100%;
+  height: 100%;
+  font-size: 12pt;
+  resize: none;
+  font-family:auto;
+}
+
+.setting_area {
+  margin: 1%;
+  border: 2px solid;
+  padding: 10px;
+  border-color: chocolate;
+  position: absolute;
+  top: 65px;
+  width: 98%;
+  height: 140px;
+}
+.flex_container {
+  display: flex;
+  margin: 0;
+  height: 100%;
+  padding: 10px;
+}
+.flex_input {
+  flex: 1;
+  height: 100%;
+  padding: 40px 0 50px;
+  position: relative;
+}
+.flex_input h2 {
+  position: absolute;
+  top: 0;
+}
+.flex_input label {
+  display: block;
+  height: 20px;
+  position: absolute;
+  bottom: 30px;
+}
+.flex_input button {
+  width: 100px;
+  height: 28px;
+  font-size: 11pt;
+}
+.btn_copy {
+  position: absolute;
+  bottom: 0;
+}
+.flex_button {
+  flex: 0;
+  display: flex;
+  align-items: center;
+}
+.flex_button button {
+  width: 100px;
+  margin: 10px;
+  height: 30px;
+  font-size: 12pt;
+}
+.center {
+  width: 100%;
+  text-align: center;
+}
