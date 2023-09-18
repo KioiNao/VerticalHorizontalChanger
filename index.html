@@ -15,31 +15,34 @@
     <main>
         <h1>縦書き・横書き相互変換ツール</h1>
         <div class="setting_area">
-        <h2>詳細設定</h2>
-        <input id="chk_dakuten" type="checkbox" name="check-1" checked><label for="chk_dakuten">濁点位置移動（『゛あ』 <->『あ゛』）</label><br>
-        <input id="chk_kantanhu" type="checkbox" name="check-2" checked><label for="chk_kantanhu">感嘆符変換（⁉<->！？/‼<->！！）</label><br>
-        <input id="chk_kaiwabun" type="checkbox" name="check-3" checked><label for="chk_kaiwabun">会話文前後改行挿入/削除</label><br>
-    </div>
-    <div class="flex_container">
-        <div class="flex_input">
-            <h2>縦書き本文</h2>
-            <textarea id="text_tate" placeholder="縦書きの文章を入力してください。"></textarea><br>
-            <label>文字数：<span id="count_tate">0</span>文字</label><br>
-            <div class="center btn_copy" onclick="TextCopy('text_tate')"><button type="button">全文コピー</button></div>
-        </div>
-        <div class="flex_button">
-            <div class="center">
-            <button type="button" onclick="TateToYoko()">→</button>
-            <button type="button" onclick="YokoToTate()">←</button>
-        </div>
-        </div>
-        <div class="flex_input">
-            <h2>横書き本文</h2>
-            <textarea id="text_yoko" placeholder="横書きの文章を入力してください。"></textarea><br>
-            <label>文字数：<span id="count_yoko">0</span>文字</label><br>
-            <div class="center btn_copy" onclick="TextCopy('text_yoko')"><button type="button">全文コピー</button></div>
-        </div>
-    </div>
+	        <h2>詳細設定</h2>
+	        <input id="chk_dakuten" type="checkbox" name="check-1" checked><label for="chk_dakuten">濁点位置移動（『゛あ』 <->『あ゛』）</label><br>
+	        <input id="chk_kantanhu" type="checkbox" name="check-2" checked><label for="chk_kantanhu">感嘆符変換（⁉<->！？/‼<->！！）</label><br>
+	        <input id="chk_kaiwabun" type="checkbox" name="check-3" checked><label for="chk_kaiwabun">会話文前後改行挿入/削除</label><br>
+	    </div>
+    	<div class="clear_area">
+			<button type="button" id="btn_clear" onclick="ClearAll()">テキストクリア</button>
+		</div>
+	    <div class="flex_container">
+	        <div class="flex_input">
+	            <h2>縦書き本文</h2>
+	            <textarea id="text_tate" placeholder="縦書きの文章を入力してください。"></textarea><br>
+	            <label>文字数：<span id="count_tate">0</span>文字</label><br>
+	            <div class="center btn_copy" onclick="TextCopy('text_tate')"><button type="button">全文コピー</button></div>
+	        </div>
+	        <div class="flex_button">
+	            <div class="center">
+	            <button type="button" onclick="TateToYoko()">→</button>
+	            <button type="button" onclick="YokoToTate()">←</button>
+	        </div>
+	        </div>
+	        <div class="flex_input">
+	            <h2>横書き本文</h2>
+	            <textarea id="text_yoko" placeholder="横書きの文章を入力してください。"></textarea><br>
+	            <label>文字数：<span id="count_yoko">0</span>文字</label><br>
+	            <div class="center btn_copy" onclick="TextCopy('text_yoko')"><button type="button">全文コピー</button></div>
+	        </div>
+	    </div>
     </main>
 </body>
 </html>
