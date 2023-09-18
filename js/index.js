@@ -9,6 +9,13 @@ $(function () {
     });
 });
 
+function ClearAll(){
+	$('#text_yoko').val('');
+	$('#text_tate').val('');
+	$('#count_tate').text('0');
+	$('#count_yoko').text('0');
+}
+
 function TateToYoko() {
     try {
         //初期化
