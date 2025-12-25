@@ -1,2 +1,2 @@
-# 縦書き・横書き相互変換ツール
+# [縦書き・横書き相互変換ツール](https://kioinao.github.io/VerticalHorizontalChanger)
 小説の会話文前後に空白行を挿入することを目的としたツールです。
