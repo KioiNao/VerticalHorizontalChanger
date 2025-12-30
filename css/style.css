@@ -2,109 +2,131 @@
   box-sizing: border-box;
 }
 html,
-body,
-main {
+body {
   height: 100%;
   margin: 0;
 }
 main {
-  padding: 225px 0 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+header,
+footer{
+  padding: 8px 12px;
+}
+
+h1, h2{
+  margin: 0;
 }
 h1 {
   text-align: center;
-  position: absolute;
-  top: 0;
-  height: 65px;
-  margin: 0;
-  width: 100%;
-  padding: 10px;
-  box-sizing: border-box;
 }
-h2 {
-  margin: 3px;
-  height: 34px;
+
+.setting_area {
+  border: 2px solid;
+  border-color: chocolate;
+  padding: 7px;
 }
-label {
+
+section {
+  flex: 1;
+  display: flex;
+  gap: 12px;
+  overflow: hidden;
+  padding: 0px 12px;
+}
+.section-tate,
+.section-button,
+.section-yoko {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+button{
   font-size: 12pt;
 }
+
 textarea {
-  width: 100%;
-  height: 100%;
-  font-size: 12pt;
+  flex: 1;
   resize: none;
-  font-family:auto;
+}
+
+.section-button{
+  flex: 0 0 auto;
+  justify-content: center;
+}
+
+.for-pc button {
+  width: 100px;
+  margin: 10px 0px;
+  height: 30px;
+}
+
+.for-sp button{
+  width: 60px;
+  margin: 0px 10px;
+}
+
+.button-copy{
+  width: 100px;
+  margin: auto;
 }
 
 #btn_clear{
 	width: 140px;
-	margin-left:10px;
-	height: 30px;
-	font-size: 12pt;
+  margin-top: 10px;
 }
 
-.setting_area {
-  margin: 0 1%;
-  border: 2px solid;
-  padding: 5px 10px;
-  border-color: chocolate;
-  position: absolute;
-  top: 65px;
-  width: 98%;
-  height: 130px;
-}
-
-.clear_area{
-	position: absolute;
-	top: 205px;
-}
-
-.flex_container {
-  display: flex;
-  margin: 0;
-  height: 92%;
-  padding: 10px;
-}
-.flex_input {
-  flex: 1;
-  height: 100%;
-  padding: 40px 0 50px;
-  position: relative;
-}
-.flex_input h2 {
-  position: absolute;
-  top: 0;
-}
-.flex_input label {
-  display: block;
-  height: 20px;
-  position: absolute;
-  bottom: 30px;
-}
-.flex_input button {
-  width: 100px;
-  height: 28px;
-  font-size: 11pt;
-}
-.btn_copy {
-  position: absolute;
-  bottom: 0;
-}
-.flex_button {
-  flex: 0;
-  display: flex;
-  align-items: center;
-}
-.flex_button button {
-  width: 100px;
-  margin: 10px;
-  height: 30px;
+label {
   font-size: 12pt;
 }
-.center {
-  width: 100%;
-  text-align: center;
+textarea {
+  font-size: 12pt;
+  font-family:auto;
 }
 
 .font-9pt{
   font-size: 9pt;
+}
+
+.for-pc{
+  display: contents;
+}
+.for-sp{
+  display: none;
+}
+
+@media (max-width: 768px) {
+  main {
+    height: auto;
+  }
+
+  section {
+    flex-direction: column;
+    overflow: visible;
+  }
+
+  .section-button{
+    flex-direction: row;
+    justify-content: center;
+    gap: 16px;
+    padding: 8px 0;
+  }
+
+  textarea {
+    min-height: 12em;
+  }
+
+  .for-pc{
+    display: none;
+  }
+  .for-sp{
+    display: contents;
+  }
+
+  button{
+    height: 40px;
+  }
 }

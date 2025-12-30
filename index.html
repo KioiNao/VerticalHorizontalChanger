@@ -1,63 +1,72 @@
 <!DOCTYPE html>
 <html lang="ja">
+	<head>
+		<!-- Google tag (gtag.js) -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=G-RDTE0S2XXN"></script>
+		<script>
+			window.dataLayer = window.dataLayer || [];
+			function gtag(){dataLayer.push(arguments);}
+			gtag('js', new Date());
 
-<head>
-	<!-- Google tag (gtag.js) -->
-	<script async src="https://www.googletagmanager.com/gtag/js?id=G-RDTE0S2XXN"></script>
-	<script>
-		window.dataLayer = window.dataLayer || [];
-		function gtag(){dataLayer.push(arguments);}
-		gtag('js', new Date());
+			gtag('config', 'G-RDTE0S2XXN');
+		</script>
+		<meta charset="UTF-8">
+		<title>縦書き・横書き相互変換ツール</title>
+		<meta name="description" content="縦書きの小説文を横書き用に変換することを主目的としたツールです。会話行の前後に改行を挿入します。文章はサーバに送信されず、ブラウザ上で完結します。">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" href="css/style.css" />
+		<link rel="stylesheet" href="css/jquery-ui.min.css" />
+		<script src="js/jquery-3.6.0.min.js"></script>
+		<script src="js/jquery-ui.min.js"></script>
+		<script src="js/index.js"></script>
+	</head>
 
-		gtag('config', 'G-RDTE0S2XXN');
-	</script>
-    <meta charset="UTF-8">
-    <title>縦書き・横書き相互変換ツール</title>
-	<meta name="description" content="縦書きの小説文を横書き用に変換することを主目的としたツールです。会話行の前後に改行を挿入します。文章はサーバに送信されず、ブラウザ上で完結します。">
-    <link rel="stylesheet" href="css/style.css" />
-    <link rel="stylesheet" href="css/jquery-ui.min.css" />
-    <script src="js/jquery-3.6.0.min.js"></script>
-    <script src="js/jquery-ui.min.js"></script>
-    <script src="js/index.js"></script>
-</head>
-
-<body>
-    <main>
-        <h1>縦書き・横書き相互変換ツール</h1>
-        <div class="setting_area">
-	        <h2>詳細設定</h2>
-	        <input id="chk_dakuten" type="checkbox" name="check-1" checked><label for="chk_dakuten">濁点位置移動（『゛あ』 <->『あ゛』）</label><br>
-	        <input id="chk_kantanhu" type="checkbox" name="check-2"><label for="chk_kantanhu">感嘆符変換（⁉<->！？/‼<->！！）</label><br>
-	        <input id="chk_kaiwabun" type="checkbox" name="check-3" checked><label for="chk_kaiwabun">会話文前後改行挿入/削除</label><br>
-	    </div>
-    	<div class="clear_area">
-			<button type="button" id="btn_clear" onclick="ClearAll()">テキストクリア</button>
-		</div>
-	    <div class="flex_container">
-	        <div class="flex_input">
-	            <h2>縦書き本文</h2>
-	            <textarea id="text_tate" placeholder="縦書きの文章を入力してください。"></textarea><br>
-	            <label>文字数：<span id="count_tate">0</span>文字</label><br>
-	            <div class="center btn_copy" onclick="TextCopy('text_tate')"><button type="button">全文コピー</button></div>
-	        </div>
-	        <div class="flex_button">
-	            <div class="center">
-	            <button type="button" onclick="TateToYoko()">→</button>
-	            <button type="button" onclick="YokoToTate()">←</button>
-	        </div>
-	        </div>
-	        <div class="flex_input">
-	            <h2>横書き本文</h2>
-	            <textarea id="text_yoko" placeholder="横書きの文章を入力してください。"></textarea><br>
-	            <label>文字数：<span id="count_yoko">0</span>文字</label><br>
-	            <div class="center btn_copy" onclick="TextCopy('text_yoko')"><button type="button">全文コピー</button></div>
-	        </div>
-	    </div>
-		<div class="font-9pt">
-			<span>※入力された本文が外部に送信されることはありません。オフラインでも利用可能です。</span><br>
-			<span>※本サイトでは Google Analytics を使用しています。取得される情報は匿名であり、個人を特定するものではありません。</span><br>
-			<span>※機能要望・不具合報告等はこちら→<a href="https://marshmallow-qa.com/kioinao_ss" target="_blank">https://marshmallow-qa.com/kioinao_ss</a></span>
-		</div>
-    </main>
-</body>
+	<body>
+		<main>
+			<header>
+				<h1>縦書き・横書き相互変換ツール</h1>
+				<div class="setting_area">
+					<h2>詳細設定</h2>
+					<input id="chk_dakuten" type="checkbox" name="check-1" checked>
+					<label for="chk_dakuten">濁点位置移動（『゛あ』 <->『あ゛』）</label><br>
+					<input id="chk_kantanhu" type="checkbox" name="check-2">
+					<label for="chk_kantanhu">感嘆符変換（⁉<->！？/‼<->！！）</label><br>
+					<input id="chk_kaiwabun" type="checkbox" name="check-3" checked>
+					<label for="chk_kaiwabun">会話文前後改行挿入/削除</label><br>
+				</div>
+				<div>
+					<button type="button" id="btn_clear" onclick="ClearAll()">テキストクリア</button>
+				</div>
+			</header>
+			<section>
+				<div class="section-tate">
+					<h2>縦書き本文</h2>
+					<textarea id="text_tate" placeholder="縦書きの文章を入力してください。"></textarea>
+					<label>文字数：<span id="count_tate">0</span>文字</label>
+					<button type="button" onclick="TextCopy('text_tate')" class="button-copy">全文コピー</button>
+				</div>
+				<div class="section-button">
+					<div class="for-pc">
+						<button type="button" onclick="TateToYoko()">→</button>
+						<button type="button" onclick="YokoToTate()">←</button>
+					</div>
+					<div class="for-sp">
+						<button type="button" onclick="TateToYoko()">↓</button>
+						<button type="button" onclick="YokoToTate()">↑</button>
+					</div>
+				</div>
+				<div class="section-yoko">
+					<h2>横書き本文</h2>
+					<textarea id="text_yoko" placeholder="横書きの文章を入力してください。"></textarea>
+					<label>文字数：<span id="count_yoko">0</span>文字</label>
+					<button type="button" onclick="TextCopy('text_yoko')" class="button-copy">全文コピー</button>
+				</div>
+			</section>
+			<footer class="font-9pt">
+				<span>※入力された本文が外部に送信されることはありません。オフラインでも利用可能です。</span><br>
+				<span>※本サイトでは Google Analytics を使用しています。取得される情報は匿名であり、個人を特定するものではありません。</span><br>
+				<span>※機能要望・不具合報告等はこちら→<a href="https://marshmallow-qa.com/kioinao_ss" target="_blank">https://marshmallow-qa.com/kioinao_ss</a></span>
+			</footer>
+		</main>
+	</body>
 </html>
