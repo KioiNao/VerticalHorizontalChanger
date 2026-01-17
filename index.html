@@ -7,7 +7,6 @@
 			window.dataLayer = window.dataLayer || [];
 			function gtag(){dataLayer.push(arguments);}
 			gtag('js', new Date());
-
 			gtag('config', 'G-RDTE0S2XXN');
 		</script>
 		<meta charset="UTF-8">
@@ -18,6 +17,7 @@
 		<link rel="stylesheet" href="css/jquery-ui.min.css" />
 		<script src="js/jquery-3.6.0.min.js"></script>
 		<script src="js/jquery-ui.min.js"></script>
+		<script src="js/constants.js"></script>
 		<script src="js/index.js"></script>
 	</head>
 
@@ -26,19 +26,58 @@
 			<header>
 				<h1>縦書き・横書き相互変換ツール</h1>
 				<div class="setting_area">
-					<h2>詳細設定</h2>
-					<input id="chk_dakuten" type="checkbox" name="check-1" checked>
-					<label for="chk_dakuten">濁点位置移動（『゛あ』 <->『あ゛』）</label><br>
-					<input id="chk_kantanhu" type="checkbox" name="check-2">
-					<label for="chk_kantanhu">感嘆符変換（⁉<->！？/‼<->！！）</label><br>
-					<input id="chk_kaiwabun" type="checkbox" name="check-3" checked>
-					<label for="chk_kaiwabun">会話文前後改行挿入/削除</label><br>
+					<h2>変換設定</h2>
+					<div class="checkbox-set">
+						<input id="chk_dakuten" type="checkbox" checked>
+						<label for="chk_dakuten">濁点位置移動（『゛あ』 <->『あ゛』）</label>
+					</div>
+					<div class="checkbox-set">
+						<input id="chk_kantanhu" type="checkbox" checked>
+						<label for="chk_kantanhu">感嘆符変換（『⁉』<->『！？』/『‼』<->『！！』）</label>
+					</div>
+					<div class="checkbox-set">
+						<input id="chk_kaiwabun" type="checkbox" checked>
+						<label for="chk_kaiwabun">会話文前後改行挿入/削除</label>
+					</div>
+					<div class="checkbox-set">
+						<input id="chk_kansuuji" type="checkbox">
+						<label for="chk_kansuuji">漢数字→算用数字変換（※算用数字→漢数字変換は未対応です。）</label>
+					</div>
 				</div>
+				<details>
+					<summary>機能詳細</summary>
+					<div>
+						<section class="summary-section">
+							<h3>会話文（カギカッコ）の前後に改行を挿入する機能</h3>
+							<p>
+								一文字目が"「"で始まり、最後が"」"で終わる行の前後に自動で改行を挿入します。<br>
+								上記の行が連続する場合にはひとまとまりとして、最初と最後にのみ改行を挿入します。<br>
+								また、文章の末尾に空白が存在した場合は、一律で自動で削除しています。<br>
+								『』や（）には対応しておりません。需要があれば検討します。
+							</p>
+						</section>
+						<section class="summary-section">
+							<h3>漢数字の算用数字変換機能</h3>
+							<p>
+								変換対象とする文字は「一～九」および「〇」「・」「十、百、千、万、億、兆」です。<br>
+								「〇一二三四五六七八九十百千」のいずれかの文字から始まり、上記の文字が続くまでをひとかたまりとして変換します。<br>
+								「一般」や「千代田」といった熟語・固有名詞は対象としないよう除外語リストで管理しています。除外語の追加要望があればご連絡ください。<br>
+								変換対象が存在する場合は、実行前に確認画面を表示します。対象外としたい場合はそこでチェックを外せば変換されません。
+							</p>
+							<p>具体的な変換例は以下の通りです。</p>
+							<ul>
+								<li>二〇〇一年 → 2001年</li>
+								<li>三・一四 → 3.14</li>
+								<li>一億五千万 → 1億5000万<small>（※読みやすさを考慮し、万以上の単位は漢字を維持します）</small></li>
+							</ul>
+						</section>
+					</div>
+				</details>
 				<div>
 					<button type="button" id="btn_clear" onclick="ClearAll()">テキストクリア</button>
 				</div>
 			</header>
-			<section>
+			<section class="section-main">
 				<div class="section-tate">
 					<h2>縦書き本文</h2>
 					<textarea id="text_tate" placeholder="縦書きの文章を入力してください。"></textarea>
@@ -47,11 +86,11 @@
 				</div>
 				<div class="section-button">
 					<div class="for-pc">
-						<button type="button" onclick="TateToYoko()">→</button>
+						<button type="button" onclick="SettingTateToYoko()">→</button>
 						<button type="button" onclick="YokoToTate()">←</button>
 					</div>
 					<div class="for-sp">
-						<button type="button" onclick="TateToYoko()">↓</button>
+						<button type="button" onclick="SettingTateToYoko()">↓</button>
 						<button type="button" onclick="YokoToTate()">↑</button>
 					</div>
 				</div>
@@ -65,8 +104,40 @@
 			<footer class="font-9pt">
 				<span>※入力された本文が外部に送信されることはありません。オフラインでも利用可能です。</span><br>
 				<span>※本サイトでは Google Analytics を使用しています。取得される情報は匿名であり、個人を特定するものではありません。</span><br>
-				<span>※機能要望・不具合報告等はこちら→<a href="https://marshmallow-qa.com/kioinao_ss" target="_blank">https://marshmallow-qa.com/kioinao_ss</a></span>
+				<span>※機能要望・不具合報告等はこちらへ。「助かった」「便利だった」などの感想も大歓迎です！→<a href="https://marshmallow-qa.com/kioinao_ss" target="_blank">https://marshmallow-qa.com/kioinao_ss</a></span>
 			</footer>
 		</main>
+		<div id="modal-list" class="hidden">
+			<!-- オーバーレイ -->
+			<div class="overlay"></div>
+			<!-- モーダル -->
+			<div class="modal-wrapper">
+				<div class="modal-content">
+					<div class="modal-main">
+						<span>変換対象から除外するもののチェックを外して、「変換実行」ボタンを押してください。</span>
+						<table id="kouho-table">
+							<colgroup>
+								<col style="width:90px">
+								<col>
+								<col>
+							</colgroup>
+							<thead>
+								<tr>
+									<th>変換対象</th>
+									<th>候補値</th>
+									<th>変更後</th>
+								</tr>
+							</thead>
+							<tbody id="henkan-kouho-tbody">
+							</tbody>
+						</table>
+					</div>
+					<div class="modal-button">
+						<button type="button" onclick="CloseModal()">キャンセル</button>
+						<button type="button" onclick="TateToYoko()">変換実行</button>
+					</div>
+				</div>
+			</div>
+		</div>
 	</body>
 </html>
