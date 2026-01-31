@@ -197,7 +197,7 @@ function TateToYoko() {
     // 行単位で処理
     for (let i = 0; i < lines.length; i++) {
         //末尾の空白削除
-        lines[i] = lines[i].trimEnd();
+        lines[i] = lines[i].trimEnd().replace(/[\uFE0E\uFE0F]/g, '');
         //空行スキップ
         if ($.trim(lines[i]).length == 0) {
             continue;
@@ -256,7 +256,7 @@ function YokoToTate() {
     //1行ずつ確認
     for (let i = 0; i < lines.length; i++) {
         //末尾の空白削除
-        lines[i] = lines[i].trimEnd();
+        lines[i] = lines[i].trimEnd().replace(/[\uFE0E\uFE0F]/g, '');
         //空行スキップ
         if ($.trim(lines[i]).length == 0) {
             continue;
