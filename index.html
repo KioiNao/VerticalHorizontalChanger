@@ -27,21 +27,27 @@
 				<h1>縦書き・横書き相互変換ツール</h1>
 				<div class="setting_area">
 					<h2>変換設定</h2>
-					<div class="checkbox-set">
-						<input id="chk_dakuten" type="checkbox" checked>
-						<label for="chk_dakuten">濁点位置移動（『゛あ』 <->『あ゛』）</label>
-					</div>
-					<div class="checkbox-set">
-						<input id="chk_kantanhu" type="checkbox" checked>
-						<label for="chk_kantanhu">感嘆符変換（『⁉』<->『！？』/『‼』<->『！！』）</label>
-					</div>
-					<div class="checkbox-set">
-						<input id="chk_kaiwabun" type="checkbox" checked>
-						<label for="chk_kaiwabun">会話文前後改行挿入/削除</label>
-					</div>
-					<div class="checkbox-set">
-						<input id="chk_kansuuji" type="checkbox">
-						<label for="chk_kansuuji">漢数字→算用数字変換（※算用数字→漢数字変換は未対応です。）</label>
+					<div class="checkbox-container">
+						<div class="checkbox-set">
+							<input id="chk_dakuten" type="checkbox" checked>
+							<label for="chk_dakuten">濁点位置移動（『゛あ』 <->『あ゛』）</label>
+						</div>
+						<div class="checkbox-set">
+							<input id="chk_kantanhu" type="checkbox" checked>
+							<label for="chk_kantanhu">感嘆符変換（『⁉』<->『！？』/『‼』<->『！！』）</label>
+						</div>
+						<div class="checkbox-set">
+							<input id="chk_kaiwabun" type="checkbox" checked>
+							<label for="chk_kaiwabun">会話文前後改行挿入/削除</label>
+						</div>
+						<div class="checkbox-set">
+							<input id="chk_kansuuji" type="checkbox">
+							<label for="chk_kansuuji">漢数字→算用数字変換（縦書き→横書き専用）</label>
+						</div>
+						<div class="checkbox-set">
+							<input id="chk_dannraku" type="checkbox">
+							<label for="chk_dannraku">長すぎる地の文を自動で改行（縦書き→横書き専用）</label>
+						</div>
 					</div>
 				</div>
 				<details>
@@ -70,6 +76,14 @@
 								<li>三・一四 → 3.14</li>
 								<li>一億五千万 → 1億5000万<small>（※読みやすさを考慮し、万以上の単位は漢字を維持します）</small></li>
 							</ul>
+						</section>
+						<section class="summary-section">
+							<h3>長すぎる地の文を自動で改行する機能</h3>
+							<p>
+								1行が120文字を超える場合、120文字以内にある最後の句点で改行（段落下げ）を挿入します。<br>
+								120文字以内に句点が存在しない場合は、120文字を超えて最初に現れる句点で改行します。<br>
+								※「」、（）、『』内の句点は対象としません。
+							</p>
 						</section>
 					</div>
 				</details>

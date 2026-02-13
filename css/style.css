@@ -11,9 +11,11 @@ main {
   display: flex;
   flex-direction: column;
 }
-header,
+header{
+  padding: 0px 12px;
+}
 footer{
-  padding: 8px 12px;
+  padding: 5px 12px;
 }
 
 h1, h2{
@@ -79,6 +81,14 @@ textarea {
   resize: none;
 }
 
+.checkbox-container {
+  display: grid; 
+  gap: 0px 20px;
+  width: 100%;
+  grid-template-columns: max-content 1fr;
+  max-width: fit-content;
+}
+
 .checkbox-set{
   display: flex;
   vertical-align: center;
@@ -102,8 +112,8 @@ textarea {
   margin: 0px 10px;
 }
 
-.button-copy{
-  width: 100px;
+.button-copy {
+  width: 150px;
   margin: auto;
 }
 
@@ -244,7 +254,7 @@ ul {
   margin: 0;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 855px) {
   main {
     height: auto;
   }
@@ -262,7 +272,11 @@ ul {
   }
 
   textarea {
-    min-height: 12em;
+    min-height: 20em;
+  }
+
+  .checkbox-container{
+    grid-template-columns: 1fr;
   }
 
   .for-pc{

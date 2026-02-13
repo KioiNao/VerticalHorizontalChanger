@@ -11,7 +11,7 @@ $(function () {
 
     //コピー機能が使えるか判定
     if(!navigator.clipboard || !window.isSecureContext){
-        $('.copy-button').hide();
+        $('.button-copy').hide();
     }
 });
 
@@ -156,6 +156,7 @@ function TateToYoko() {
     let chk_kantanhu = $('#chk_kantanhu').prop('checked');    //感嘆符変換
     let chk_kaiwabun = $('#chk_kaiwabun').prop('checked');    //会話文改行
     let chk_kansuuji = $('#chk_kansuuji').prop('checked');    //漢数字変換
+    let chk_dannraku = $('#chk_dannraku').prop('checked');    //段落替え挿入
 
     if(chk_kansuuji){
         //漢数字変換
@@ -207,6 +208,10 @@ function TateToYoko() {
             lines[i] = lines[i].replace(/⁉/g, '！？')
             lines[i] = lines[i].replace(/‼/g, '！！')
         }
+        if (chk_dannraku) {
+            //段落替え挿入
+            lines[i] = splitLongLine(lines[i], 120);
+        }
         let line = lines[i].split('');
         if (chk_dakuten) {
             //濁点
@@ -236,8 +241,48 @@ function TateToYoko() {
 
     //Google Analytics
     if (typeof gtag === 'function') {
-        gtag('event', 'convert_tate_to_yoko');
+        gtag('event', 'convert_tate_to_yoko', {
+            'option_dakuten': chk_dakuten ? 'on' : 'off',
+            'option_kantanhu': chk_kantanhu ? 'on' : 'off',
+            'option_kaiwabun': chk_kaiwabun ? 'on' : 'off',
+            'option_kansuuji': chk_kansuuji ? 'on' : 'off',
+            'option_dannraku': chk_dannraku ? 'on' : 'off'
+        });
     }
+}
+
+/**
+ * 長文分割関数
+ * @param {String} line 
+ * @param {int} limit 
+ * @returns 分割後文字列
+ */
+function splitLongLine(line, limit) {
+    if (line.length <= limit) {
+        return line;
+    }
+
+    // 1. 判定用にマスクした文字列作成
+    const mask = line.replace(/「[^」]*?」|（[^）]*?）|『[^』]*?』/g, m => "*".repeat(m.length));
+
+    // 2. マスクした文字列で「。」の場所を探す
+    let splitIndex = mask.lastIndexOf('。', limit);
+
+    // 2. もし120文字以内に「。」がなければ、121文字目以降で「前」から探す
+    if (splitIndex === -1) {
+        splitIndex = mask.indexOf('。', limit);
+    }
+
+    // 3. 「。」が見つかり、かつそれが「行の最後の文字」ではない場合のみ分割
+    if (splitIndex !== -1 && splitIndex < mask.length - 1) {
+        let firstPart = line.substring(0, splitIndex + 1);
+        let secondPart = line.substring(splitIndex + 1);
+
+        // 後半は再帰
+        return firstPart + '\n　' + splitLongLine(secondPart, limit);
+    }
+
+    return line;
 }
 
 /**
@@ -301,7 +346,11 @@ function YokoToTate() {
 
     //Google Analytics
     if (typeof gtag === 'function') {
-        gtag('event', 'convert_yoko_to_tate');
+        gtag('event', 'convert_yoko_to_tate', {
+            'option_dakuten': chk_dakuten ? 'on' : 'off',
+            'option_kantanhu': chk_kantanhu ? 'on' : 'off',
+            'option_kaiwabun': chk_kaiwabun ? 'on' : 'off'
+        });
     }
 }
 
