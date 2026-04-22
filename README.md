@@ -1,4 +1,4 @@
-# [縦書き・横書き相互変換ツール](https://kioinao.github.io/VerticalHorizontalChanger)
+# [小説文 縦書き・横書き相互変換ツール](https://kioinao.github.io/VerticalHorizontalChanger)
 ## 変換設定について
 
 本ツールでは、縦書き原稿を横書きのWeb小説向け表記に整えるため、以下の変換機能を用意しています。  
